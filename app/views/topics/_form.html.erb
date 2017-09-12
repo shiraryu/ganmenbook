@@ -1,0 +1,37 @@
+<%= form_for(@topic,url:choose_new_or_edit) do |f| %>
+  <% if @topic.errors.any? %>
+    <div id = "error_explanation">
+      <h2><%= @topic.errors.count %>件のエラーがあります。</h2>
+
+      <ul>
+        <% @topic.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class= "field">
+    <%= f.label :photo %>      <!-- carrierwaveによる画像アップ -->
+    <br>
+    <br>
+    <%= f.file_field :pictureimage %>
+    <%= f.hidden_field :pictureimage_cache %>
+  </div>
+  <br>
+  <br>
+  <%= f.label :content %><br />
+  <br>
+  <%= f.text_field :content,class:'form-control' %>
+  <br>
+  <br>
+  <br>
+  <%= f.submit "投稿"%>
+  <br>
+  <br>
+<% end %>
+<br>
+<br>
+<%= link_to "一覧",topics_path %>
+<br>
+<br>

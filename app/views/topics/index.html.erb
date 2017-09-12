@@ -1,0 +1,31 @@
+<div class = "container">
+  <div class = "wrapper col-md-12 col-sm-10">
+    <p id = "notice"><%= notice %></p>
+    <h3>Topics</h3>
+    <% @topics.reverse_each do |topic| %>    <!-- reverse_eachとすることで新規投稿が上に掲載されるようにする -->
+    <div class = "row">
+      <div class = "topic">
+      <%if topic.topicimage? %>
+        <%= topic_tag(topic.topicimage) %>
+      <% else %>
+        <%= image_tag 'no_image(1).png' %>
+      <% end %>
+    </div>
+      <br>
+      <br>
+      <br>
+      <p><%= topic.content %></p>
+      <br>
+      <div class = "contributor">
+        <p>投稿者：<%= topic.user.name %><span style="margin-right: 5px;"></span><%= profile_img(@user = topic.user) %></p>
+      </div>
+      <br>
+      <%= link_to "編集",edit_topic_path(topic.id),class:'btn btn-default btn-sm' %>
+      <%= link_to "削除",topic_path(topic.id),method: :delete,data:{confirm:'本当に削除していいですか？'},class:'btn btn-default btn-sm' %>
+    </div>
+    <% end %>
+  </div>
+  <div id="page-top-btn" class="page-top-btn">
+    <p><a class="move-page-top" id="move-page-top">▲</a></p>
+  </div>
+</div>
