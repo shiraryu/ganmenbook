@@ -45,6 +45,7 @@ end
 
 group :development do
   gem 'letter_opener_web'
+  gem 'dotenv-rails'
 end
 
 gem 'twitter-bootstrap-rails'
@@ -55,3 +56,8 @@ gem 'rails_12factor', group: :production  # Heroku上のコンソールログ出
 gem 'rails_admin'
 gem 'cancan'
 gem 'activeresource'
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'carrierwave'  # 画像をアップロード
+gem 'mini_magick'   # 画像サイズ変更
