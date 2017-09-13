@@ -1,4 +1,5 @@
 class TopicsController < ApplicationController
+  before_action :authenticate_user!        #ログイン有無のチェック
   before_action :set_topic,only:[:edit,:update,:destroy]
 
   def index
@@ -7,14 +8,15 @@ class TopicsController < ApplicationController
 
   def new
     if params[:back]
-      @picture = Picture.new(pictures_params)
+      @topic = Topic.new(topicss_params)
     else
-      @picture = Picture.new
+      @topic = Topic.new
     end
   end
 
   def created
-    @picture = Picture.new(pictures_params)
+    @topic = Topic.new(topics_params)
+    @topic.user_id = current_user.id      #contentと一緒にuser_idも保存されるようにする*/
     if @topic.save
         redirect_to topics_path,notice:"投稿しました"
       else

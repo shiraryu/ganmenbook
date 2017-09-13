@@ -5,3 +5,25 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+n = 1
+
+while n <= 100
+  email = Faker::Internet.email
+  password = "password"
+  name = Faker::Name.name
+  User.create!(
+    email: email,
+    password: password,
+    password_confirmation: password,
+    name: name,
+    )
+
+  Topic.create(
+    content: "hoge",
+    user_id: n
+  )
+  n = n + 1
+
+end
