@@ -19,6 +19,7 @@ class TopicsController < ApplicationController
     @topic.user_id = current_user.id      #contentと一緒にuser_idも保存されるようにする*/
     if @topic.save
         redirect_to topics_path,notice:"投稿しました"
+        NoticeMailer.sendmail_topic(@topic).deliver      #Mailer呼び出し
       else
         render'new'
       end
