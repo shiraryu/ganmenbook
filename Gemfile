@@ -43,7 +43,12 @@ group :development, :test do
   gem 'better_errors'
 end
 
+group :development do
+  gem 'letter_opener_web'
+end
+
 gem 'twitter-bootstrap-rails'
 gem 'jquery-turbolinks'
 gem 'devise'
 gem 'faker'
+gem 'rails_12factor', group: :production  # Heroku上のコンソールログ出力
