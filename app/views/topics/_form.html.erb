@@ -12,15 +12,15 @@
   <% end %>
 
   <div class= "field">
-    <%= f.label :photo %>      <!-- carrierwaveによる画像アップ -->
+    <%= f.label :写真 %>      <!-- carrierwaveによる画像アップ -->
     <br>
     <br>
-    <%= f.file_field :pictureimage %>
-    <%= f.hidden_field :pictureimage_cache %>
+    <%= f.file_field :topicimage %>
+    <%= f.hidden_field :topicimage_cache %>
   </div>
   <br>
   <br>
-  <%= f.label :content %><br />
+  <%= f.label :本文 %><br />
   <br>
   <%= f.text_field :content,class:'form-control' %>
   <br>

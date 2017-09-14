@@ -5,7 +5,7 @@ ja:
       contact: "お問い合わせ"
       user: "ユーザー"
     attributes:
-      blog:
+      topic:
         title: "タイトル"
         content: "内容"
       contact:
@@ -21,7 +21,9 @@ ja:
         password: "パスワード"
         password_confirmation: "確認用パスワード"
         remember_me: "ログインを記憶"
-      picture:
+      topic:
         content: "本文"
-        pictureimage: "写真"
+        topicimage: "写真"
         photo: 写真
+      comment:
+        content: "コメント内容"

@@ -2,10 +2,9 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
-  resources :topics,only:[:index,:new,:create,:edit,:update,:destroy]do
-    collection do
-      post :confirm
-    end
+  resources :topics do
+    resources :comments
+    post :confirm ,on: :collection
   end
 
   devise_for :users,controllers:{

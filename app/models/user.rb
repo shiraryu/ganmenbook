@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   mount_uploader:avatar,AvatarUploader  # carrierwave用の設定
 
   has_many :topics,dependent: :destroy
+  has_many :comments,dependent: :destroy  #CommentモデルのAssociation設定
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
      user = User.find_by(provider: auth.provider, uid: auth.uid)

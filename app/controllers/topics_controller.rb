@@ -1,22 +1,28 @@
 class TopicsController < ApplicationController
   before_action :authenticate_user!        #ログイン有無のチェック
-  before_action :set_topic,only:[:edit,:update,:destroy]
+  before_action :set_topic,only:[:show,:edit,:update,:destroy]
 
   def index
     @topics = Topic.all
   end
 
+  def show
+    @comment = @topic.comments.build   # 入力フォーム用インスタンス
+    @comments = @topic.comments        # 一覧用インスタンス
+  end
+
   def new
     if params[:back]
-      @topic = Topic.new(topicss_params)
+      @topic = Topic.new(topics_params)
     else
       @topic = Topic.new
     end
   end
 
-  def created
+  def create
     @topic = Topic.new(topics_params)
     @topic.user_id = current_user.id      #contentと一緒にuser_idも保存されるようにする*/
+    @topic.topicimage.retrieve_from_cache! params[:cache][:topicimage]
     if @topic.save
         redirect_to topics_path,notice:"投稿しました"
         NoticeMailer.sendmail_topic(@topic).deliver      #Mailer呼び出し
@@ -44,13 +50,14 @@ class TopicsController < ApplicationController
 
   def confirm
     @topic = Topic.new(topics_params)
-    render :new if @picture.invalid?
+    render :new if @topic.invalid?
   end
 
   private
-    def topics_params
-      params.require(:topic).permit(:content)
-    end
+  def topics_params
+    # topicimageを保存する時に、確認画面で一時的にキャッシュしたものを掘り出して値にセットし、保存
+    params.require(:topic).permit(:content,:topicimage,:topicimage_cache)
+  end
     def set_topic
       @topic = Topic.find(params[:id])
     end
