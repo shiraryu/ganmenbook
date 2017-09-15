@@ -1,0 +1,9 @@
+<h4>フォロー 一覧</h4>
+<!--選択されたUserがフォローしている人を取り出して表示-->
+<% @user.followed_users.each do |user| %>
+  <div class="container-grandchild col-md-2 col-sm-4 col-xs-6 ">
+    <%= link_to user.name, user %><br />
+    <%= render 'follow_form', user: user %>
+    <br>
+  </div>
+<% end %>

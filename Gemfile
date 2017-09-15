@@ -61,3 +61,4 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'carrierwave'  # 画像をアップロード
 gem 'mini_magick'   # 画像サイズ変更
+gem 'fog'

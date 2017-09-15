@@ -4,10 +4,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable
 
-  mount_uploader:avatar,AvatarUploader  # carrierwave用の設定
+  mount_uploader :avatar, AvatarUploader  # carrierwave用の設定
 
   has_many :topics,dependent: :destroy
   has_many :comments,dependent: :destroy  #CommentモデルのAssociation設定
+  # ユーザーが複数のrelationshipを持つことを定義
+  has_many :relationships,foreign_key: "follower_id",dependent: :destroy
+  has_many :reverse_relationships,foreign_key: "followed_id", class_name: "Relationship",dependent: :destroy
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
      user = User.find_by(provider: auth.provider, uid: auth.uid)
@@ -56,6 +59,24 @@ class User < ActiveRecord::Base
       params.delete :current_password
       update_without_password(params,*options)
     end
+  end
+
+  # 「自分」と「自分”が”フォローしている人」の1対多の関係性を定義
+  has_many :followed_users, through: :relationships, source: :followed
+  # 「自分」と「自分”を”フォローしている人」の1対多の関係性を定義
+  has_many :followers, through: :reverse_relationships, source: :follower
+
+  # 指定のユーザーをフォローする
+  def follow!(other_user)
+    relationships.create!(followed_id: other_user.id)
+  end
+  # フォローしているかどうかを確認する
+  def following?(other_user)
+    relationships.find_by(followed_id: other_user.id)
+  end
+  # 指定のユーザーのフォローを解除する
+  def unfollow!(other_user)
+    relationships.find_by(followed_id: other_user.id).destroy
   end
 
 end

@@ -21,8 +21,10 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">menu<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><%= link_to "新規投稿", new_topic_path %></li>
-                  <li><%= link_to "Topic", topics_path %></li>
+                  <li><%= link_to "トピック", topics_path %></li>
+                  <li><%= link_to "メッセージ", conversations_path %></li>
                   <% if user_signed_in? %>
+                    <li><%= link_to 'ユーザー一覧', users_path %></li>
                     <li><%= link_to 'マイページ', edit_user_registration_path %></li>
                     <li><%= link_to'ログアウト',destroy_user_session_path,method: :delete %></li>
                   <% else %>

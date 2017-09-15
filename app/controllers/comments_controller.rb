@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :set_comment,only:[:edit,:update,:destroy]
   # コメントを保存、投稿するためのアクション
   def create
     # Topicをパラメータの値から探し出し,Topicに紐づくcommentsとしてbuildする
@@ -15,11 +16,9 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    @comment = Comment.find(params[:id])
   end
 
   def update
-    @comment = Comment.find(params[:id])
       respond_to do |format|
         if @comment.update(comment_params)
           format.html {redirect_to topic_path(@comment.topic), notice:"コメントを編集しました！"}
@@ -30,7 +29,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
     respond_to do |format|
       if @comment.destroy
         format.js { render :index }  # JS形式でレスポンスを返す
@@ -44,5 +42,8 @@ class CommentsController < ApplicationController
     # ストロングパラメーター
     def comment_params
       params.require(:comment).permit(:topic_id, :content)
+    end
+    def set_comment
+      @comment = Comment.find(params[:id])
     end
 end

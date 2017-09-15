@@ -1,9 +1,12 @@
 <%= form_for([topic,comment],remote: true) do |f| %>   <!-- remote: trueでAjyax使用 -->
   <%= f.hidden_field :topic_id %>
   <div class="field">
-    <%= f.text_field :content, placeholder: "内容", class: "form-control"  %>
+    <br>
+    <%= f.text_field :content, placeholder: "コメント入力", class: "form-control"  %>
   </div>
+  <br>
   <div class="actions">
     <%= f.submit %>
   </div>
+  <br>
 <% end %>

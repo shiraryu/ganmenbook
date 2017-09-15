@@ -4,20 +4,19 @@
     <h3>トピックス</h3>
     <% @topics.reverse_each do |topic| %>    <!-- reverse_eachとすることで新規投稿が上に掲載されるようにする -->
     <div class = "row">
+      <br>
+      <p><%= topic.content %></p>
+      <br>
+      <br>
       <div class = "topic">
       <%if topic.topicimage? %>
         <%= image_tag(topic.topicimage) %>
-      <% else %>
-        <%= image_tag 'no_image(2).png' %>
       <% end %>
     </div>
-      <br>
-      <br>
-      <br>
-      <p><%= topic.content %></p>
+      <br>
       <!-- Topicにlink_toで詳細リンクを設定する -->
       <%= link_to topic_path(topic) do %>
-        <h4><strong>トピック詳細</strong></h4>
+        <h5><strong>詳細を見る</strong></h5>
       <% end %>
       <br>
       <div class = "contributor">
