@@ -24,6 +24,8 @@ footer{
     margin: 0;
     padding: 0;
     width: 100%;
+    background: linear-gradient(to bottom, white, #D3D8E8);
+    height: 1000px;
 }
 #top-img{
     margin: auto;
@@ -32,7 +34,7 @@ footer{
     padding: 0 auto;
 }
 #top-signin{
-    margin: 50px 15px 0 15px;
+    margin: 50px 15px 100px 15px;
     h1{
       font-size: 60px;
       font-family: inherit;
@@ -42,7 +44,6 @@ footer{
 }
 .top.container{
   padding: 0;   /*top画面のfooterにcontainerが重ならない措置&横目一杯にbackgroundcolor*/
-  background: linear-gradient(to bottom, white, #D3D8E8);
 }
 .container{
   background-color: white;
@@ -132,7 +133,6 @@ body{
     text-align: center;
     min-height: 100%;
     padding-bottom: 0;
-    background-color: #D3D8E8;
     margin-bottom: 0;
 }
 input[type="submit"].btn-block{   /*ボタン*/
