@@ -65,7 +65,7 @@ gem 'activeresource'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
-gem 'carrierwave'  # 画像をアップロード
+gem 'carrierwave',github: 'carrierwaveuploader/carrierwave'  #画像のキャッシュをS３にする
 gem 'mini_magick'   # 画像サイズ変更
 gem 'fog'
 gem 'dotenv-rails'

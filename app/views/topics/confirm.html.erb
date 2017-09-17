@@ -6,7 +6,9 @@
       <%= hidden_field_tag :"cache[topicimage]",@topic.topicimage.cache_name %>
       <%= f.hidden_field :content %>
       <br>
-      <%= image_tag(@topic.topicimage.url) %>
+      <%if @topic.topicimage? %>
+        <%= image_tag(@topic.topicimage.url) %>
+      <% end %>
       <br>
       <br>
       <p>本文<br /><%= @topic.content %></p>

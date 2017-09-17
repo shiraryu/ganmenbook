@@ -22,7 +22,9 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.new(topics_params)
     @topic.user_id = current_user.id      #contentと一緒にuser_idも保存されるようにする*/
-    @topic.topicimage.retrieve_from_cache! params[:cache][:topicimage]
+    if params[:cache]
+      @topic.topicimage.retrieve_from_cache! params[:cache][:topicimage]
+    end
     if @topic.save
         redirect_to topics_path,notice:"投稿しました"
         NoticeMailer.sendmail_topic(@topic).deliver      #Mailer呼び出し
@@ -49,8 +51,8 @@ class TopicsController < ApplicationController
   end
 
   def confirm
-    @topic = Topic.new(topics_params)
-    render :new if @topic.invalid?
+      @topic = Topic.new(topics_params)
+      render :new if @topic.invalid?
   end
 
   private

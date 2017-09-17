@@ -9,6 +9,7 @@ CarrierWave.configure do |config|
 
   config.fog_public     = true
   config.fog_attributes = {'Cache-Control' => 'public, max-age=86400'}
+  config.cache_storage = :fog    #追記 S3にキャッシュを保存するために
 
   case Rails.env
     when 'production'
